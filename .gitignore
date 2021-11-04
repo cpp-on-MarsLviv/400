@@ -1,0 +1,27 @@
+# cmake specific files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+Makefile.tmp
+
+# executable files
+run
+
+# some minor examples
+boost_ex/
+condition_variable/
+constness/
+constness2/
+initializer_list/
+
+observer/
+private_inheritance/
+serialization/
+serialization_boost/
+stateMachine/
+temp_ref/
+unique/
+vector/
+
+
