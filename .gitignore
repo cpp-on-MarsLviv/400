@@ -14,13 +14,12 @@ condition_variable/
 constness/
 constness2/
 initializer_list/
-
-observer/
-private_inheritance/
+temp_ref/
 serialization/
 serialization_boost/
+private_inheritance/
+
 stateMachine/
-temp_ref/
 unique/
 vector/
 
