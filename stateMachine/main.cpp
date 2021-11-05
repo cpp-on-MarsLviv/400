@@ -15,7 +15,10 @@ class Creature {
 private:
 	enum class Names { FROG, PRINCE };
 
-	struct State { virtual string response() = 0; };
+	struct State { 
+		virtual ~State() {};
+		virtual string response() = 0; 
+	};
 	struct Frog : public State{ string response() { return "I'm Froggy"; } };
 	struct Prince : public State { string response() { return "I'm Prince"; } };
 	int state;
