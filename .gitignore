@@ -19,6 +19,7 @@ serialization/
 serialization_boost/
 private_inheritance/
 
-
+# build files
+build-LifeGame-Desktop_Qt_6_2_1_GCC_64bit-Debug/
 
 
