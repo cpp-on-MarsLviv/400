@@ -3,11 +3,16 @@
 #include "Utils/applocation.h"
 #include "Helpers/constants.h"
 
+#include "Utils/logger.h"
+
 #include <QApplication>
 #include <QScreen>
 
 int main(int argc, char *argv[])
 {
+    Logger::init();
+    qInfo() << "main started";
+
     QApplication a(argc, argv);
     MainWindow mainWindow;
 
@@ -18,6 +23,9 @@ int main(int argc, char *argv[])
 
     mainWindow.setWindowTitle(Helpers::appName);
     mainWindow.show();
+
+    Logger::clean();
+
     return a.exec();
 }
 

@@ -10,6 +10,7 @@ namespace Helpers {
 const QString appName = "Game Life v 0.1";
 const int appWidthDefault = 1300;
 const int appHeightDefault = 800;
+const QString appLogfileDefault = "./LifeGame.log";
 /*
 const int layoutProportions[] = {2, 5, 5};
 
