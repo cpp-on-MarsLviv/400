@@ -11,6 +11,13 @@ const QString appName = "Game Life v 0.1";
 const int appWidthDefault = 1300;
 const int appHeightDefault = 800;
 const QString appLogfileDefault = "./LifeGame.log";
+
+// Menu names
+const QString menuName = "&Controls";
+const QString actionStart = "&Start Life";
+const QString actionStop = "S&top Life";
+const QString actionIncreaseDensity = "&Increase Density";
+const QString actionDecreaseDensity = "&Decrease Density";
 /*
 const int layoutProportions[] = {2, 5, 5};
 

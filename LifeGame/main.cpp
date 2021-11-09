@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     mainWindow.setWindowTitle(Helpers::appName);
     mainWindow.show();
 
-    Logger::clean();
+    //Logger::clean();
 
     return a.exec();
 }
