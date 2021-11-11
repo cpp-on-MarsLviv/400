@@ -7,6 +7,10 @@
 #include <QAction>
 #include <QWheelEvent>
 
+#include <QTextTableFormat>
+#include <QHBoxLayout>
+#include <QTableView>
+#include <QHeaderView>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     qInfo() << "MainWindow started";
 
     createMenu();
-
+    createUI();
 }
 
 MainWindow::~MainWindow()
@@ -48,7 +52,24 @@ void MainWindow::createMenu()
     actionsMenu->addAction(decreaseDensity);
 }
 
+void MainWindow::createUI() {
+    lifeModel = new LifeModel(Helpers::defaultAreaWidth, this);
 
+    tableView = new QTableView;
+
+    tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    tableView->horizontalHeader()->setMaximumSectionSize(0);
+    tableView->verticalHeader()->setMaximumSectionSize(0);
+
+    tableView->horizontalHeader()->hide();
+    tableView->verticalHeader()->hide();
+
+    tableView->setModel(lifeModel);
+
+    setCentralWidget(tableView);
+}
 
 void MainWindow::onStartLife()
 {

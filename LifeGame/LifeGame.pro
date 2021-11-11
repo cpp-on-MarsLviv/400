@@ -12,13 +12,16 @@ SOURCES += \
     Utils/applocation.cpp \
     Utils/logger.cpp \
     Widgets/mainwindow.cpp \
+    Models/lifemodel.cpp \
     main.cpp \
 
 HEADERS += \
     Helpers/constants.h \
+    Models/lifemodel.h \
     Utils/applocation.h \
     Utils/logger.h \
     Widgets/mainwindow.h \
+    Models/lifemodel.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

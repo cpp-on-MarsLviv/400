@@ -18,6 +18,11 @@ const QString actionStart = "&Start Life";
 const QString actionStop = "S&top Life";
 const QString actionIncreaseDensity = "&Increase Density";
 const QString actionDecreaseDensity = "&Decrease Density";
+
+// Life area size
+const int minAreaWidth = 100;
+const int maxAreaWidth = 300;
+const int defaultAreaWidth = 200;
 /*
 const int layoutProportions[] = {2, 5, 5};
 
