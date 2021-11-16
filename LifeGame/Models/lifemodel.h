@@ -4,6 +4,14 @@
 #include <QAbstractTableModel>
 #include <QObject>
 
+#include <vector>
+#include <memory>
+
+class Cell;
+
+using std::vector;
+using std::shared_ptr;
+
 class LifeModel : public QAbstractTableModel
 {
 public:
@@ -16,7 +24,7 @@ public:
 
 private:
     int areaWidth;
-    //int *areaState[][];
+    shared_ptr<vector<shared_ptr<Cell>>> lifeArea;
 };
 
 #endif // LIFEMODEL_H

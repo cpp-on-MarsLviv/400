@@ -9,6 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Models/cell.cpp \
+    Models/cellarea.cpp \
     Utils/applocation.cpp \
     Utils/logger.cpp \
     Widgets/mainwindow.cpp \
@@ -17,6 +19,9 @@ SOURCES += \
 
 HEADERS += \
     Helpers/constants.h \
+    Models/cell.h \
+    Models/cellarea.h \
+    Models/cellobserver.h \
     Models/lifemodel.h \
     Utils/applocation.h \
     Utils/logger.h \
