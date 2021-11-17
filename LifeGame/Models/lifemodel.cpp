@@ -1,11 +1,15 @@
 #include "lifemodel.h"
+#include "cellarea.h"
 
 #include <QBrush>
 
-LifeModel::LifeModel(int initAreaWidth, QObject *parent) :
+LifeModel::LifeModel(ModelParams params, QObject *parent) :
     QAbstractTableModel{parent},
-    areaWidth{initAreaWidth} {
-    //lifeArea = Cell::create(initAreaWidth * initAreaWidth);
+    areaWidth{params.getAreaWidth()},
+    timing{params.getTiming()} {
+    lifeArea = CellArea::getSharedCells(areaWidth);
+    qDebug() << "made area with size:" << lifeArea->size();
+    CellArea::connectCells();
 }
 
 int LifeModel::rowCount(const QModelIndex & /*parent*/) const { return areaWidth; }
@@ -30,4 +34,4 @@ QVariant LifeModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-Qt::ItemFlags LifeModel::flags(const QModelIndex &index) const { return Qt::NoItemFlags; }
+Qt::ItemFlags LifeModel::flags(const QModelIndex &/*index*/) const { return Qt::NoItemFlags; }

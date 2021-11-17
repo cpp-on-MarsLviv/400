@@ -53,7 +53,7 @@ void MainWindow::createMenu()
 }
 
 void MainWindow::createUI() {
-    lifeModel = new LifeModel(Helpers::defaultAreaWidth, this);
+    lifeModel = new LifeModel(ModelParams(Helpers::debugAreaWidth20, 1), this);//TODO: change to Helpers::defaultAreaWidth
 
     tableView = new QTableView;
 

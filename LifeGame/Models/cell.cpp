@@ -7,6 +7,13 @@ shared_ptr<Cell> Cell::create() { return std::shared_ptr<Cell>(new Cell()); }
 
 std::shared_ptr<const Cell> Cell::getSharedPtr() const {return shared_from_this(); }
 
+void Cell::clear()
+{
+    state = emptyState;
+    removeAllNeighbors();
+    removeAllObservers();
+}
+
 void Cell::addNeighbor(shared_ptr<Cell> cell) { neighbors.insert(cell); }
 
 void Cell::removeNeighbor(shared_ptr<Cell> cell) { neighbors.erase(cell); }

@@ -20,7 +20,7 @@ constexpr auto to_underlying(E e) noexcept { return static_cast<std::underlying_
 /**
  * Represent elementary Cell with set of states.
  * Creation only with static method Cell::create.
- * Settling in std::sharsd_ptr
+ * Settling in std::shared_ptr
  */
 class Cell : public std::enable_shared_from_this<Cell> {
     /**
@@ -78,6 +78,7 @@ public:
 
     static shared_ptr<Cell> create();               //
     std::shared_ptr<const Cell> getSharedPtr() const;//
+    void clear();
 
     void addNeighbor(shared_ptr<Cell>);             //
     void removeNeighbor(shared_ptr<Cell>);          //

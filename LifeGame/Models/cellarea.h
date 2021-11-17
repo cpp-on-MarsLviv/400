@@ -13,7 +13,10 @@ class Cell;
  */
 class CellArea
 {
-    static shared_ptr<vector<shared_ptr<Cell>>> cells;
+    static vector<shared_ptr<Cell>> cells;
+    static shared_ptr<vector<shared_ptr<Cell>>> sharedCells;
+
+    static size_t currentWidth;
 
     CellArea() = default;
 public:
@@ -22,7 +25,14 @@ public:
     CellArea& operator=(const CellArea&) = delete;
     CellArea& operator=(CellArea&&) = delete;
 
-    static shared_ptr<vector<shared_ptr<Cell>>> getBunch(size_t);
+    static vector<shared_ptr<Cell>> getCells(size_t);
+    static shared_ptr<vector<shared_ptr<Cell>>> getSharedCells(size_t);
+    static void connectCells();
+    static void seedCells();
+    static void changeLifeRate(int);
+
+    static void start();
+    static void stop();
 };
 
 #endif // CELLAREA_H

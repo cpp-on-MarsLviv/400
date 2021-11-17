@@ -1,6 +1,8 @@
 #ifndef LIFEMODEL_H
 #define LIFEMODEL_H
 
+#include "modelparams.h"
+
 #include <QAbstractTableModel>
 #include <QObject>
 
@@ -15,7 +17,7 @@ using std::shared_ptr;
 class LifeModel : public QAbstractTableModel
 {
 public:
-    explicit LifeModel(int initAreaWidth, QObject *parent = nullptr);
+    explicit LifeModel(ModelParams params, QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -24,6 +26,7 @@ public:
 
 private:
     int areaWidth;
+    size_t timing;
     shared_ptr<vector<shared_ptr<Cell>>> lifeArea;
 };
 

@@ -23,5 +23,6 @@ const QString actionDecreaseDensity = "&Decrease Density";
 const int minAreaWidth = 100;
 const int maxAreaWidth = 300;
 const int defaultAreaWidth = 200;
+const int debugAreaWidth20 = 20;
 }
 #endif // CONSTANTS_H

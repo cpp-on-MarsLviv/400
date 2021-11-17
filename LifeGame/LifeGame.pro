@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     Models/cell.cpp \
     Models/cellarea.cpp \
+    Models/modelparams.cpp \
     Utils/applocation.cpp \
     Utils/logger.cpp \
     Widgets/mainwindow.cpp \
@@ -23,6 +24,7 @@ HEADERS += \
     Models/cellarea.h \
     Models/cellobserver.h \
     Models/lifemodel.h \
+    Models/modelparams.h \
     Utils/applocation.h \
     Utils/logger.h \
     Widgets/mainwindow.h \
