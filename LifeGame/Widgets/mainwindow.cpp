@@ -12,6 +12,8 @@
 #include <QTableView>
 #include <QHeaderView>
 
+using std::make_shared;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -53,7 +55,7 @@ void MainWindow::createMenu()
 }
 
 void MainWindow::createUI() {
-    lifeModel = new LifeModel(ModelParams(Helpers::debugAreaWidth20, 1), this);//TODO: change to Helpers::defaultAreaWidth
+    lifeModel = new LifeModel(make_shared<ModelParams>(ModelParams(Helpers::debugAreaWidth20, Helpers::defaultTiming, Helpers::defaultDensity)), this);//TODO: change to Helpers::defaultAreaWidth
 
     tableView = new QTableView;
 

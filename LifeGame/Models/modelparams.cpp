@@ -1,16 +1,24 @@
 #include "modelparams.h"
 
-ModelParams::ModelParams(int newAreaWidth, size_t newTiming) : areaWidth{newAreaWidth}, timing{newTiming}
+ModelParams::ModelParams(size_t newAreaWidth, double newTiming, double newDensity) :
+    areaWidth{newAreaWidth},
+    timing{newTiming},
+    density{newDensity}
 {
 
 }
 
-int ModelParams::getAreaWidth() const
+size_t ModelParams::getAreaWidth() const
 {
     return areaWidth;
 }
 
-size_t ModelParams::getTiming() const
+double ModelParams::getTiming() const
 {
     return timing;
+}
+
+double ModelParams::getDensity() const
+{
+    return density;
 }

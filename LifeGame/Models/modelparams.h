@@ -8,12 +8,22 @@
 
 class ModelParams
 {
-    int areaWidth;
-    size_t timing;
+    size_t areaWidth;
+    double timing;
+    double density;
+
 public:
-    ModelParams(int areaWidth, size_t timing);
-    int getAreaWidth() const;
-    size_t getTiming() const;
+    ModelParams(size_t areaWidth, double timing, double density);
+    ModelParams(const ModelParams&) = default;
+    ModelParams(ModelParams&&) = default;
+    ModelParams& operator=(const ModelParams&) = default;
+    ModelParams& operator=(ModelParams&&) = default;
+
+    ~ModelParams() = default;
+
+    size_t getAreaWidth() const;
+    double getTiming() const;
+    double getDensity() const;
 };
 
 #endif // MODELPARAMS_H

@@ -20,6 +20,8 @@ SOURCES += \
 
 HEADERS += \
     Helpers/constants.h \
+    Helpers/functions.h \
+    Helpers/generators.h \
     Models/cell.h \
     Models/cellarea.h \
     Models/cellobserver.h \

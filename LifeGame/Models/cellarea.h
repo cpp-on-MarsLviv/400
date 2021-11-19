@@ -28,7 +28,7 @@ public:
     static vector<shared_ptr<Cell>> getCells(size_t);
     static shared_ptr<vector<shared_ptr<Cell>>> getSharedCells(size_t);
     static void connectCells();
-    static void seedCells();
+    static void seedCells(double density);
     static void changeLifeRate(int);
 
     static void start();

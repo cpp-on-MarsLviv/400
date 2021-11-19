@@ -23,18 +23,12 @@ constexpr auto to_underlying(E e) noexcept { return static_cast<std::underlying_
  * Settling in std::shared_ptr
  */
 class Cell : public std::enable_shared_from_this<Cell> {
+public:
     /**
      * Represent Cell states
      */
     enum class State { EMPTY, LOW_SETTLED, NORM_SETTLED, HARD_SETTLED };
-    /**
-     * In order to save memory and accelerate performance all Cell instances use the same State objects
-     */
-    static const State emptyState = State::EMPTY;
-    static const State lowSettledState = State::LOW_SETTLED;
-    static const State normSettledState = State::NORM_SETTLED;
-    static const State hardSettledState = State::HARD_SETTLED;
-
+private:
     static constexpr float probabilityToDeath = 0.3; // TODO: implement this feature
     static constexpr float probabilityToBorn = 0.3;
     /**
@@ -54,20 +48,20 @@ class Cell : public std::enable_shared_from_this<Cell> {
      */
     static const int hardLevel = 8;
 
-    static const map<int, State> stateMapping;      //
+    static const map<int, State> stateMapping;
 
-    static map<int, State> createStateMapping();    //
+    static map<int, State> createStateMapping();
 
-    State state;
+    mutable State state;
 
-    set<shared_ptr<Cell>>  neighbors;
+    set<shared_ptr<const Cell>>  neighbors;
     set<shared_ptr<CellObserver>>  observers;
 
-    void onStateChanged() const;                    //
-    void notifyNeighbors() const;                   //
-    void notifyObservers() const;                   //
+    void onStateChanged() const;
+    void notifyNeighbors() const;
+    void notifyObservers() const;
 
-    Cell();                                         //
+    Cell();
 public:
     Cell(const Cell&) = delete;
     Cell(Cell&&) = delete;
@@ -76,22 +70,37 @@ public:
 
     ~Cell() = default;
 
-    static shared_ptr<Cell> create();               //
-    std::shared_ptr<const Cell> getSharedPtr() const;//
+    static shared_ptr<Cell> create();
+    std::shared_ptr<const Cell> getSharedPtr() const;
     void clear();
 
-    void addNeighbor(shared_ptr<Cell>);             //
-    void removeNeighbor(shared_ptr<Cell>);          //
-    void removeAllNeighbors();                      //
+    void addNeighbor(shared_ptr<const Cell>);
+    void removeNeighbor(shared_ptr<const Cell>);
+    void removeAllNeighbors();
 
-    void addObserver(shared_ptr<CellObserver>);     //
-    void removeObserver(shared_ptr<CellObserver>);  //
-    void removeAllObservers();                      //
+    void addObserver(shared_ptr<CellObserver>);
+    void removeObserver(shared_ptr<CellObserver>);
+    void removeAllObservers();
 
-    State getState() const;                         //
-    void setState(State);                           //
-    void setState(int);                             //
-    void updateState();                             //
+    State getState() const;
+    void setState(State) const;
+    void setState(int) const;
+    void updateState() const;
+
+    /**
+     * In order to save memory and accelerate performance all Cell instances use the same State objects
+     */
+    static const State emptyState = State::EMPTY;
+    static const State lowSettledState = State::LOW_SETTLED;
+    static const State normSettledState = State::NORM_SETTLED;
+    static const State hardSettledState = State::HARD_SETTLED;
+
+    /**
+     * some methods for debugging
+     */
+    size_t neighborsCount() const;
+    size_t observersCount() const;
 };
 
+//const Cell::State emptyState;
 #endif // CELL_H

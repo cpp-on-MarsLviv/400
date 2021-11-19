@@ -1,6 +1,10 @@
 #include "cell.h"
 #include "cellobserver.h"
 
+#include <QDebug>
+
+
+
 Cell::Cell() : state {emptyState} {}
 
 shared_ptr<Cell> Cell::create() { return std::shared_ptr<Cell>(new Cell()); }
@@ -14,9 +18,14 @@ void Cell::clear()
     removeAllObservers();
 }
 
-void Cell::addNeighbor(shared_ptr<Cell> cell) { neighbors.insert(cell); }
+void Cell::addNeighbor(shared_ptr<const Cell> cell) {
+    //qDebug() << "cell:" << cell.get();
+    auto pair = neighbors.insert(cell);
+    //if (pair.second) qDebug() << "inserted";
+    //else qDebug() << "exist";
+}
 
-void Cell::removeNeighbor(shared_ptr<Cell> cell) { neighbors.erase(cell); }
+void Cell::removeNeighbor(shared_ptr<const Cell> cell) { neighbors.erase(cell); }
 
 void Cell::removeAllNeighbors() { neighbors.clear(); }
 
@@ -26,18 +35,22 @@ void Cell::removeObserver(shared_ptr<CellObserver> observer) { observers.erase(o
 
 void Cell::removeAllObservers() { observers.clear(); }
 
+size_t Cell::neighborsCount() const { return neighbors.size(); }
+
+size_t Cell::observersCount() const { return observers.size(); }
+
 Cell::State Cell::getState() const { return state;}
 
-void Cell::setState(State newState)
+void Cell::setState(State newState) const
 {
     if (state == newState)
             return;
 
     state = newState;
-    onStateChanged();//  TODO: optimize it like create a queue to add Cell to change it state and handle them at once
+    //onStateChanged();//  TODO: optimize it like create a queue to add Cell to change it state and handle them at once
 }
 
-void Cell::setState(int newState) { setState(stateMapping.at(newState)); }
+void Cell::setState(int newState) const { setState(stateMapping.at(newState)); }
 
 const map<int, Cell::State> Cell::stateMapping = Cell::createStateMapping();
 
@@ -56,7 +69,7 @@ map<int, Cell::State> Cell::createStateMapping()
     return mapping;
 }
 
-void Cell::updateState()
+void Cell::updateState() const
 {
     int neighborsCount = 0;
     for (auto it = neighbors.cbegin(); it != neighbors.cend(); ++it)
@@ -74,7 +87,7 @@ void Cell::onStateChanged() const
 
 void Cell::notifyNeighbors() const
 {
-    for (auto it = neighbors.cbegin(); it != neighbors.cend(); ++it)
+    for (auto it = neighbors.begin(); it != neighbors.end(); ++it)
         (*it)->updateState();
 }
 
