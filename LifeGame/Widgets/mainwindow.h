@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include "Models/lifemodel.h"
+#include "Models/blankmodel.h"
 
 #include <QMainWindow>
 
@@ -21,7 +22,13 @@ class MainWindow : public QMainWindow
     QTextTableFormat *table = Q_NULLPTR;
 
     QTableView *tableView = Q_NULLPTR;
-    LifeModel *lifeModel = Q_NULLPTR;
+    QAbstractTableModel *lifeModel = Q_NULLPTR;
+    QAbstractTableModel *blankModel = Q_NULLPTR;
+
+    shared_ptr<ModelParams> modelParams;
+
+    bool actionIncreaseDensityLimited;
+    bool actionDecreaseDensityLimited;
 
 
     void createMenu();

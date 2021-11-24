@@ -9,11 +9,13 @@
 class ModelParams
 {
     size_t areaWidth;
-    double timing;
-    double density;
+    size_t timing;
+    float density;
+    float probabilityToBorn;
+    float probabilityToDeath;
 
 public:
-    ModelParams(size_t areaWidth, double timing, double density);
+    ModelParams(size_t areaWidth, size_t timing, float density, float probabilityToBorn, float probabilityToDeath);
     ModelParams(const ModelParams&) = default;
     ModelParams(ModelParams&&) = default;
     ModelParams& operator=(const ModelParams&) = default;
@@ -22,8 +24,13 @@ public:
     ~ModelParams() = default;
 
     size_t getAreaWidth() const;
-    double getTiming() const;
-    double getDensity() const;
+
+    size_t getTiming() const;
+    void setTiming(size_t);
+
+    float getDensity() const;
+    float getProbabilityToBorn() const;
+    float getProbabilityToDeath() const;
 };
 
 #endif // MODELPARAMS_H

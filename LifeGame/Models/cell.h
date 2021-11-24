@@ -28,9 +28,9 @@ public:
      * Represent Cell states
      */
     enum class State { EMPTY, LOW_SETTLED, NORM_SETTLED, HARD_SETTLED };
-private:
-    static constexpr float probabilityToDeath = 0.3; // TODO: implement this feature
-    static constexpr float probabilityToBorn = 0.3;
+
+    float probabilityToDeath;
+    float probabilityToBorn;
     /**
      * If settled Cell has neighbors from 0..2 it can die because of loneliness with probabilityToDeath
      */
@@ -47,7 +47,7 @@ private:
      * If settled Cell has neighbors from 7..8 it can die because of crowding with probabilityToDeath
      */
     static const int hardLevel = 8;
-
+private:
     static const map<int, State> stateMapping;
 
     static map<int, State> createStateMapping();

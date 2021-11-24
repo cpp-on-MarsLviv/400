@@ -2,9 +2,11 @@
 #define CELLAREA_H
 
 #include <vector>
+#include <set>
 #include <memory>
 
 using std::vector;
+using std::set;
 using std::shared_ptr;
 
 class Cell;
@@ -15,6 +17,7 @@ class CellArea
 {
     static vector<shared_ptr<Cell>> cells;
     static shared_ptr<vector<shared_ptr<Cell>>> sharedCells;
+    //static shared_ptr<vector<int>> populatedCells;
 
     static size_t currentWidth;
 
@@ -28,11 +31,11 @@ public:
     static vector<shared_ptr<Cell>> getCells(size_t);
     static shared_ptr<vector<shared_ptr<Cell>>> getSharedCells(size_t);
     static void connectCells();
-    static void seedCells(double density);
-    static void changeLifeRate(int);
+    static shared_ptr<set<int>> seedCells(double density);
+//    static void changeLifeRate(int);
 
-    static void start();
-    static void stop();
+//    static void start();
+//    static void stop();
 };
 
 #endif // CELLAREA_H

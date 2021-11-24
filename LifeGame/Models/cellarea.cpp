@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <set>
 
 #include <QDebug>
 
@@ -52,12 +53,12 @@ shared_ptr<vector<shared_ptr<Cell> > > CellArea::getSharedCells(size_t width)
         //for_each(sharedCells->cbegin(), sharedCells->cend(), [idx = 0](shared_ptr<Cell> cell) mutable {qDebug() << "cell[" << idx++ << "]:" << cell.get();});
 
         return sharedCells;
-    } else if (currentWidth < width) {
-        qDebug() << "decreasing Life area";
+    } else if (currentWidth > width) {
+        qDebug() << "currentWidth:" << currentWidth << " new width:" << width << " -> decreasing Life area";
         currentWidth = width;
         sharedCells->resize(currentWidth * currentWidth);
         for_each(sharedCells->begin(), sharedCells->end(), [](shared_ptr<Cell> cell){ cell->clear(); });
-        for_each(sharedCells->cbegin(), sharedCells->cend(), [idx = 0](shared_ptr<Cell> cell) mutable {qDebug() << "cell[" << idx++ << "]:" << cell.get();});
+        //for_each(sharedCells->cbegin(), sharedCells->cend(), [idx = 0](shared_ptr<Cell> cell) mutable {qDebug() << "cell[" << idx++ << "]:" << cell.get();});
 
         return sharedCells;
     } else {
@@ -66,7 +67,7 @@ shared_ptr<vector<shared_ptr<Cell> > > CellArea::getSharedCells(size_t width)
         size_t additionalSize = width * width - currentWidth * currentWidth;
         currentWidth = width;
         for (size_t i = 0; i < additionalSize; ++i) { sharedCells->emplace_back(Cell::create()); };
-        for_each(sharedCells->cbegin(), sharedCells->cend(), [idx = 0](shared_ptr<Cell> cell) mutable {qDebug() << "cell[" << idx++ << "]:" << cell.get();});
+        //for_each(sharedCells->cbegin(), sharedCells->cend(), [idx = 0](shared_ptr<Cell> cell) mutable {qDebug() << "cell[" << idx++ << "]:" << cell.get();});
 
         return sharedCells;
     }
@@ -78,7 +79,6 @@ shared_ptr<vector<shared_ptr<Cell> > > CellArea::getSharedCells(size_t width)
  */
 void CellArea::connectCells()
 {
-    qDebug() << "start";
     auto cellInRange = [](int i) -> bool { return i >= 0 && i < static_cast<int>(currentWidth); };
     std::for_each(sharedCells->begin(), sharedCells->end(), [idx = 0, cellInRange](shared_ptr<Cell> cell) mutable {
         int row = idx / currentWidth;
@@ -108,11 +108,11 @@ void CellArea::connectCells()
 //    });
 }
 
-void CellArea::seedCells(double density)
+shared_ptr<set<int>> CellArea::seedCells(double density)
 {
     size_t areaSize = currentWidth * currentWidth;
     size_t bornNewCells = areaSize * density;
-    shared_ptr<vector<int>> numbers = Helpers::Generators::getMT19937Bunch(Helpers::seed7, 0, areaSize - 1, bornNewCells);
+    shared_ptr<set<int>> numbers = Helpers::Generators::getMT19937Bunch(Helpers::seed7, 0, areaSize - 1, bornNewCells);
     std::copy(numbers->cbegin(), numbers->cend(), std::ostream_iterator<int> (std::cout, " ") );
 
 //    for_each(sharedCells->cbegin(), sharedCells->cend(), [idx = 0](shared_ptr<Cell> cell) mutable {
@@ -124,20 +124,22 @@ void CellArea::seedCells(double density)
     } );
 //    for_each(sharedCells->cbegin(), sharedCells->cend(), [idx = 0](shared_ptr<Cell> cell) mutable {
 //            qDebug() << "i:" << idx++ << "  AFTERstate:" << Helpers::to_underlying(cell->getState()); });   // -> 123 ???
-    //sharedCells->at(numbers->at(0))->setState(Cell::lowSettledState);
+    return numbers;
 }
 // static shared_ptr<vector<shared_ptr<Cell>>> sharedCells;
-void CellArea::changeLifeRate(int)
-{
 
-}
 
-void CellArea::start()
-{
+//void CellArea::changeLifeRate(int)
+//{
 
-}
+//}
 
-void CellArea::stop()
-{
+//void CellArea::start()
+//{
 
-}
+//}
+
+//void CellArea::stop()
+//{
+
+//}

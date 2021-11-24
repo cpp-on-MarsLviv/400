@@ -71,12 +71,12 @@ map<int, Cell::State> Cell::createStateMapping()
 
 void Cell::updateState() const
 {
-    int neighborsCount = 0;
+    int settledNeighborsCount = 0;
     for (auto it = neighbors.cbegin(); it != neighbors.cend(); ++it)
         if ( (*it)->getState() != emptyState)
-            ++neighborsCount;
+            ++settledNeighborsCount;
 
-    setState(neighborsCount);
+    setState(settledNeighborsCount);
 }
 
 void Cell::onStateChanged() const

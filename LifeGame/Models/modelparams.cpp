@@ -1,9 +1,13 @@
 #include "modelparams.h"
 
-ModelParams::ModelParams(size_t newAreaWidth, double newTiming, double newDensity) :
+#include <QDebug>
+
+ModelParams::ModelParams(size_t newAreaWidth, size_t newTiming, float newDensity, float newProbabilityToBorn, float newProbabilityToDeath) :
     areaWidth{newAreaWidth},
     timing{newTiming},
-    density{newDensity}
+    density{newDensity},
+    probabilityToBorn{newProbabilityToBorn},
+    probabilityToDeath{newProbabilityToDeath}
 {
 
 }
@@ -13,12 +17,27 @@ size_t ModelParams::getAreaWidth() const
     return areaWidth;
 }
 
-double ModelParams::getTiming() const
+size_t ModelParams::getTiming() const
 {
     return timing;
 }
 
-double ModelParams::getDensity() const
+void ModelParams::setTiming(size_t newTiming)
+{
+    timing = newTiming;
+}
+
+float ModelParams::getDensity() const
 {
     return density;
+}
+
+float ModelParams::getProbabilityToBorn() const
+{
+    return probabilityToBorn;
+}
+
+float ModelParams::getProbabilityToDeath() const
+{
+    return probabilityToDeath;
 }

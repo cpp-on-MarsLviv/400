@@ -3,10 +3,12 @@
 
 #include <random>
 #include <vector>
+#include <set>
 #include <memory>
 #include <functional>
 
 using std::vector;
+using std::set;
 using std::shared_ptr;
 using std::make_shared;
 using std::for_each;
@@ -27,15 +29,18 @@ public:
     static int getMT19937Number(int seed, int min, int max) {
         std::mt19937 gen(seed);
         std::uniform_int_distribution<int> dist(min, max);
-        static auto roll = std::bind(dist, gen);
+        auto roll = std::bind(dist, gen);
 
         return roll();
     }
 
-    static shared_ptr<vector<int>> getMT19937Bunch(int seed, int min, int max, size_t size) {
-        shared_ptr<vector<int>> numbers = make_shared<vector<int>>();
-        numbers->reserve(size);
-        for (size_t i = 0; i < size; ++i) numbers->emplace_back(getMT19937Number(seed, min, max));
+    static shared_ptr<set<int>> getMT19937Bunch(int seed, int min, int max, size_t size) {
+        shared_ptr<set<int>> numbers = make_shared<set<int>>();
+
+        std::mt19937 gen(seed);
+        std::uniform_int_distribution<int> dist(min, max);
+        auto roll = std::bind(dist, gen);
+        for (size_t i = 0; i < size; ++i) numbers->emplace(roll());
 
         return numbers;
     }
@@ -44,14 +49,19 @@ public:
         std::random_device rd;
         std::mt19937 gen(rd());
         std::uniform_int_distribution<int> dist(min, max);
-        static auto roll = std::bind(dist, gen);
+        auto roll = std::bind(dist, gen);
         return roll();
     }
 
     static shared_ptr<vector<int>> getRandomDeviceBunch(int min, int max, size_t size) {
         shared_ptr<vector<int>> numbers = make_shared<vector<int>>();
         numbers->reserve(size);
-        for (size_t i = 0; i < size; ++i) numbers->emplace_back(getRandomDeviceNumber(min, max));
+
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> dist(min, max);
+        auto roll = std::bind(dist, gen);
+        for (size_t i = 0; i < size; ++i) numbers->emplace_back(roll());
 
         return numbers;
     }
